@@ -67,6 +67,7 @@ public class AuthorizationServerConfig {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	//Filtro - Configurando para funcionar com o Spring Security. Habilitar Authorization server
 	@Bean
 	@Order(2)
 	public SecurityFilterChain asSecurityFilterChain(HttpSecurity http) throws Exception {

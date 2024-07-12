@@ -45,14 +45,14 @@ public class ResourceServerConfig {
 	public SecurityFilterChain rsSecurityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf(csrf -> csrf.disable());
-		http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll());
-		http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
+		http.authorizeHttpRequests(authorize -> authorize.anyRequest().permitAll()); // Por padrão está tudo liberado. Restrição na rota. Por perfil de usuário.
+		http.oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults())); //Token JWT
 		http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
 		return http.build();
 	}
 
 	@Bean
-	public JwtAuthenticationConverter jwtAuthenticationConverter() {
+	public JwtAuthenticationConverter jwtAuthenticationConverter() { //Conversor de autorização
 		JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
 		grantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
 		grantedAuthoritiesConverter.setAuthorityPrefix("");
